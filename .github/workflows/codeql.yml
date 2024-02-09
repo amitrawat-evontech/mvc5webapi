@@ -62,8 +62,22 @@ jobs:
 
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
+    # - name: Autobuild
+    #   uses: github/codeql-action/autobuild@v3
+      - name: actions/checkout@v4.1.1
+        uses: actions/checkout@v4.1.1
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
+        
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
+
+      - name: Restore NuGet packages
+        run: nuget restore MVC5API.sln
+
+      - name: Build RandomString4Net for Release
+        run: msbuild MVC5API.sln -property:Configuration=Release -property:platform="Any CPU"
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
