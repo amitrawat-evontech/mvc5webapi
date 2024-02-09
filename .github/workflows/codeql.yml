@@ -76,7 +76,7 @@ jobs:
     - name: Restore NuGet packages
       run: nuget restore MVC5API.sln
 
-    - name: Build RandomString4Net for Release
+    - name: Build MVC5API for Release
       run: msbuild MVC5API.sln -property:Configuration=Release -property:platform="Any CPU"
 
     # ℹ️ Command-line programs to run using the OS shell.
