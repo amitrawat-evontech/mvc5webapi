@@ -79,12 +79,15 @@ jobs:
     - name: Create Build Directory
       run: mkdir _build
 
+    - name: Create Out Directory
+      run: mkdir _out
+
     - name: Restore NuGet packages
       run: nuget restore MVC5API.sln
 
     - name: Build MVC5API for Release
       # run: msbuild MVC5API.sln -property:Configuration=Release -property:platform="Any CPU"
-      run: msbuild.exe "${{ github.workspace }}/MVC5API/MVC5API.csproj" /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
+      run: msbuild.exe "${{ github.workspace }}/MVC5API/MVC5API.csproj" /nologo /nr:false /p:OutputPath="../_out" /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
